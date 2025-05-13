@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-const TOKEN_ADDRESS = "0x802af493e50472f39f7F4454cbe6da0824619523";
-const CASINO_ADDRESS = "0xeD6f282Fe86e54Fb4Fa3DfB709aC7bB238A1295E";
+const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
+const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
 const ABI = [ // Simplified ABI
     "function buy() payable",
     "function sell(uint256 tokenAmount)",
