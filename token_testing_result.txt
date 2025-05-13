@@ -1,0 +1,315 @@
+Using contract tester version 0.6.4
+(1/3)🧬Compiling contract: CasinoToken_flattened_20852978_1747146047.sol
+[✅PASS]Compilation
+(2/3)🤖Generating test case for: CasinoToken_flattened_20852978_1747146047.sol
+[✅PASS]Read contract
+[ℹ️INFO] Contract file already exists in destination, skipping adjust.
+[⚠️WARNING]No </think> tag found in input
+[✅PASS]Test case generation
+[✅PASS]Write test contract file
+(3/3)🧪Running tests in CasinoToken_flattened_20852978_1747146047.t.sol
+(🧪Attempt 1/3)
+Compiling 1 files with Solc 0.8.28
+Solc 0.8.28 finished in 817.57ms
+Compiler run successful!
+
+Ran 13 tests for test/CasinoToken_flattened_20852978_1747146047.t.sol:ContractTest
+[PASS] testBuyNoETH() (gas: 12172)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testBuyNoETH
+
+Traces:
+  [12172] ContractTest::testBuyNoETH()
+    ├─ [0] console::log("Running testBuyNoETH") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::expectRevert(custom error 0xf28dceb3:  Send ETH to buy tokens)
+    │   └─ ← [Return] 
+    ├─ [513] CasinoToken::buy()
+    │   └─ ← [Revert] revert: Send ETH to buy tokens
+    └─ ← [Stop] 
+
+[PASS] testBuyTokens() (gas: 57218)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testBuyTokens
+
+Traces:
+  [62018] ContractTest::testBuyTokens()
+    ├─ [0] console::log("Running testBuyTokens") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [2918] CasinoToken::balanceOf(CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [32567] CasinoToken::buy{value: 1000000000000000000}()
+    │   ├─ emit Transfer(from: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], value: 10000000000000000000000000 [1e25])
+    │   ├─ emit TokensPurchased(buyer: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], ethSpent: 1000000000000000000 [1e18], tokensReceived: 10000000000000000000000000 [1e25])
+    │   └─ ← [Stop] 
+    ├─ [492] CasinoToken::RATE() [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [918] CasinoToken::balanceOf(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496]) [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [0] VM::assertEq(10000000000000000000000000 [1e25], 10000000000000000000000000 [1e25], "Incorrect number of tokens received on buy") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [918] CasinoToken::balanceOf(CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [0] VM::assertEq(0, 0, "Token reserve not reduced correctly") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testMintByNonOwner() (gas: 17335)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testMintByNonOwner
+
+Traces:
+  [17335] ContractTest::testMintByNonOwner()
+    ├─ [0] console::log("Running testMintByNonOwner") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::prank(0x000000000000000000000000000000000000bEEF)
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [2986] CasinoToken::mint(1000)
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x000000000000000000000000000000000000bEEF)
+    └─ ← [Stop] 
+
+[PASS] testMintByOwner() (gas: 33397)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testMintByOwner
+
+Traces:
+  [33397] ContractTest::testMintByOwner()
+    ├─ [0] console::log("Running testMintByOwner") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [2918] CasinoToken::balanceOf(CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [361] CasinoToken::decimals() [staticcall]
+    │   └─ ← [Return] 18
+    ├─ [13201] CasinoToken::mint(1000000000000000000000 [1e21])
+    │   ├─ emit Transfer(from: 0x0000000000000000000000000000000000000000, to: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], value: 1000000000000000000000 [1e21])
+    │   └─ ← [Stop] 
+    ├─ [918] CasinoToken::balanceOf(CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   └─ ← [Return] 10001000000000000000000000 [1e25]
+    ├─ [0] VM::assertEq(10001000000000000000000000 [1e25], 10001000000000000000000000 [1e25], "Mint did not increase reserve correctly") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testReceiveFallbackBuy() (gas: 61934)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testReceiveFallbackBuy
+
+Traces:
+  [61934] ContractTest::testReceiveFallbackBuy()
+    ├─ [0] console::log("Running testReceiveFallbackBuy") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [2918] CasinoToken::balanceOf(CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [32438] CasinoToken::receive{value: 500000000000000000}()
+    │   ├─ emit Transfer(from: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], value: 5000000000000000000000000 [5e24])
+    │   ├─ emit TokensPurchased(buyer: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], ethSpent: 500000000000000000 [5e17], tokensReceived: 5000000000000000000000000 [5e24])
+    │   └─ ← [Stop] 
+    ├─ [492] CasinoToken::RATE() [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [918] CasinoToken::balanceOf(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496]) [staticcall]
+    │   └─ ← [Return] 5000000000000000000000000 [5e24]
+    ├─ [0] VM::assertEq(5000000000000000000000000 [5e24], 5000000000000000000000000 [5e24], "Fallback did not yield correct token amount") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [918] CasinoToken::balanceOf(CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f]) [staticcall]
+    │   └─ ← [Return] 5000000000000000000000000 [5e24]
+    ├─ [0] VM::assertEq(5000000000000000000000000 [5e24], 5000000000000000000000000 [5e24], "Token reserve not updated correctly after fallback") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testSellNotEnoughETHReserve() (gas: 70963)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testSellNotEnoughETHReserve
+
+Traces:
+  [78563] ContractTest::testSellNotEnoughETHReserve()
+    ├─ [0] console::log("Running testSellNotEnoughETHReserve") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::deal(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], 10000000000000000000 [1e19])
+    │   └─ ← [Return] 
+    ├─ [34567] CasinoToken::buy{value: 1000000000000000000}()
+    │   ├─ emit Transfer(from: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], value: 10000000000000000000000000 [1e25])
+    │   ├─ emit TokensPurchased(buyer: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], ethSpent: 1000000000000000000 [1e18], tokensReceived: 10000000000000000000000000 [1e25])
+    │   └─ ← [Stop] 
+    ├─ [16828] CasinoToken::withdrawETH(1000000000000000000 [1e18])
+    │   ├─ [41] ContractTest::receive{value: 1000000000000000000}()
+    │   │   └─ ← [Stop] 
+    │   ├─ emit ETHWithdrawn(owner: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], amount: 1000000000000000000 [1e18])
+    │   └─ ← [Stop] 
+    ├─ [492] CasinoToken::RATE() [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [0] VM::expectRevert(custom error 0xf28dceb3:  Not enough ETH in reserve)
+    │   └─ ← [Return] 
+    ├─ [4627] CasinoToken::sell(5000000000000000000000000 [5e24])
+    │   └─ ← [Revert] revert: Not enough ETH in reserve
+    └─ ← [Stop] 
+
+[PASS] testSellTokens() (gas: 76925)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testSellTokens
+
+Traces:
+  [79725] ContractTest::testSellTokens()
+    ├─ [0] console::log("Running testSellTokens") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::deal(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], 10000000000000000000 [1e19])
+    │   └─ ← [Return] 
+    ├─ [34567] CasinoToken::buy{value: 1000000000000000000}()
+    │   ├─ emit Transfer(from: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], value: 10000000000000000000000000 [1e25])
+    │   ├─ emit TokensPurchased(buyer: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], ethSpent: 1000000000000000000 [1e18], tokensReceived: 10000000000000000000000000 [1e25])
+    │   └─ ← [Stop] 
+    ├─ [492] CasinoToken::RATE() [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [18274] CasinoToken::sell(5000000000000000000000000 [5e24])
+    │   ├─ emit Transfer(from: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], to: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], value: 5000000000000000000000000 [5e24])
+    │   ├─ [41] ContractTest::receive{value: 500000000000000000}()
+    │   │   └─ ← [Stop] 
+    │   ├─ emit TokensSold(seller: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], tokensSold: 5000000000000000000000000 [5e24], ethReceived: 500000000000000000 [5e17])
+    │   └─ ← [Stop] 
+    ├─ [492] CasinoToken::RATE() [staticcall]
+    │   └─ ← [Return] 10000000000000000000000000 [1e25]
+    ├─ [918] CasinoToken::balanceOf(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496]) [staticcall]
+    │   └─ ← [Return] 5000000000000000000000000 [5e24]
+    ├─ [0] VM::assertEq(5000000000000000000000000 [5e24], 5000000000000000000000000 [5e24], "Token balance not reduced correctly after sell") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(9500000000000000000 [9.5e18], 9500000000000000000 [9.5e18], "ETH balance not updated correctly after sell") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testSellWithoutTokens() (gas: 19968)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testSellWithoutTokens
+
+Traces:
+  [19968] ContractTest::testSellWithoutTokens()
+    ├─ [0] console::log("Running testSellWithoutTokens") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::expectRevert(custom error 0xf28dceb3:  Not enough tokens)
+    │   └─ ← [Return] 
+    ├─ [8063] CasinoToken::sell(1)
+    │   └─ ← [Revert] revert: Not enough tokens
+    └─ ← [Stop] 
+
+[PASS] testSetRateByNonOwner() (gas: 17291)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testSetRateByNonOwner
+
+Traces:
+  [17291] ContractTest::testSetRateByNonOwner()
+    ├─ [0] console::log("Running testSetRateByNonOwner") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::prank(0x000000000000000000000000000000000000bEEF)
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [2964] CasinoToken::setRate(5000000 [5e6])
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x000000000000000000000000000000000000bEEF)
+    └─ ← [Stop] 
+
+[PASS] testSetRateByOwner() (gas: 21185)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testSetRateByOwner
+
+Traces:
+  [21185] ContractTest::testSetRateByOwner()
+    ├─ [0] console::log("Running testSetRateByOwner") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [7743] CasinoToken::setRate(5000000000000000000000000 [5e24])
+    │   └─ ← [Stop] 
+    ├─ [492] CasinoToken::RATE() [staticcall]
+    │   └─ ← [Return] 5000000000000000000000000 [5e24]
+    ├─ [0] VM::assertEq(5000000000000000000000000 [5e24], 5000000000000000000000000 [5e24], "Rate not updated correctly by owner") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testSetRateZero() (gas: 14961)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testSetRateZero
+
+Traces:
+  [14961] ContractTest::testSetRateZero()
+    ├─ [0] console::log("Running testSetRateZero") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::expectRevert(custom error 0xf28dceb3:  Rate must be positive)
+    │   └─ ← [Return] 
+    ├─ [3011] CasinoToken::setRate(0)
+    │   └─ ← [Revert] revert: Rate must be positive
+    └─ ← [Stop] 
+
+[PASS] testWithdrawETHByNonOwner() (gas: 55157)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testWithdrawETHByNonOwner
+
+Traces:
+  [59957] ContractTest::testWithdrawETHByNonOwner()
+    ├─ [0] console::log("Running testWithdrawETHByNonOwner") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::deal(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], 10000000000000000000 [1e19])
+    │   └─ ← [Return] 
+    ├─ [34567] CasinoToken::buy{value: 1000000000000000000}()
+    │   ├─ emit Transfer(from: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], value: 10000000000000000000000000 [1e25])
+    │   ├─ emit TokensPurchased(buyer: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], ethSpent: 1000000000000000000 [1e18], tokensReceived: 10000000000000000000000000 [1e25])
+    │   └─ ← [Stop] 
+    ├─ [0] VM::prank(0x000000000000000000000000000000000000bEEF)
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [3007] CasinoToken::withdrawETH(1000000000000000000 [1e18])
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x000000000000000000000000000000000000bEEF)
+    └─ ← [Stop] 
+
+[PASS] testWithdrawETHByOwner() (gas: 65911)
+Logs:
+  Initial CasinoToken reserve: 10000000000000000000000000
+  Initial ETH balance of token contract: 0
+  Running testWithdrawETHByOwner
+
+Traces:
+  [73511] ContractTest::testWithdrawETHByOwner()
+    ├─ [0] console::log("Running testWithdrawETHByOwner") [staticcall]
+    │   └─ ← [Stop] 
+    ├─ [0] VM::deal(ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], 10000000000000000000 [1e19])
+    │   └─ ← [Return] 
+    ├─ [34567] CasinoToken::buy{value: 1000000000000000000}()
+    │   ├─ emit Transfer(from: CasinoToken: [0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f], to: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], value: 10000000000000000000000000 [1e25])
+    │   ├─ emit TokensPurchased(buyer: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], ethSpent: 1000000000000000000 [1e18], tokensReceived: 10000000000000000000000000 [1e25])
+    │   └─ ← [Stop] 
+    ├─ [16828] CasinoToken::withdrawETH(1000000000000000000 [1e18])
+    │   ├─ [41] ContractTest::receive{value: 1000000000000000000}()
+    │   │   └─ ← [Stop] 
+    │   ├─ emit ETHWithdrawn(owner: ContractTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496], amount: 1000000000000000000 [1e18])
+    │   └─ ← [Stop] 
+    ├─ [0] VM::assertEq(10000000000000000000 [1e19], 10000000000000000000 [1e19], "ETH not withdrawn correctly by owner") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(0, 0, "Token contract ETH balance should be zero after withdrawal") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+Suite result: ok. 13 passed; 0 failed; 0 skipped; finished in 2.42ms (1.49ms CPU time)
+
+Ran 1 test suite in 1.37s (2.42ms CPU time): 13 tests passed, 0 failed, 0 skipped (13 total tests)
+
