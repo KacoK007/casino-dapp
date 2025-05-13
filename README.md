@@ -6,7 +6,7 @@ A decentralized casino application where players can bet CST tokens (CasinoToken
 
 ## 🌐 Live Demo
 Deployed frontend (GitHub Pages):
-👉 [https://yourusername.github.io/mini-casino-dapp](https://yourusername.github.io/mini-casino-dapp)
+👉 [https://kacok007.github.io/casino-dapp/](https://kacok007.github.io/casino-dapp/)
 
 ---
 
@@ -14,8 +14,8 @@ Deployed frontend (GitHub Pages):
 **Testnet:** Sepolia
 
 Contracts deployed on:
-- **CasinoToken:** `0x...`
-- **CasinoGame:** `0x...`
+- **CasinoToken:** `0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d`
+- **CasinoGame:** `0x98f41F64F738bA25FC884227Dc4cFfd01669F723`
 
 (Replace with actual addresses)
 

@@ -58,7 +58,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
       const amountInTokens = ethers.parseUnits(amount, decimals);
       const tx = await tokenContract.approve(CASINO_ADDRESS, amountInTokens);
       await tx.wait();
-      setStatus(`Approved ${amount} CST for spending by the casino contract.`);
+      setStatus(`Approved ${amount} CTKN for spending by the casino contract.`);
     } catch (err) {
       setStatus(`Error: ${err.message}`);
     }
@@ -68,7 +68,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
     try {
       const tx = await tokenContract.buy({ value: ethers.parseEther(ethAmount) });
       await tx.wait();
-      setStatus(`Swapped ${ethAmount} ETH for CST`);
+      setStatus(`Swapped ${ethAmount} ETH for CTKN`);
       await fetchBalance();
     } catch (err) {
       setStatus(`Error: ${err.message}`);
@@ -83,7 +83,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
       await approveTx.wait();
       const tx = await tokenContract.sell(amount);
       await tx.wait();
-      setStatus(`Swapped ${tokenAmount} CST for ETH`);
+      setStatus(`Swapped ${tokenAmount} CTKN for ETH`);
     } catch (err) {
       setStatus(`Error: ${err.message}`);
     }
@@ -111,8 +111,8 @@ export default function TokenSwap({ provider, balance, setBalance }) {
       </h2>
 
       <div className="mb-6 p-4 bg-black bg-opacity-40 rounded-lg relative z-10">
-        <p className="text-lg font-bold text-center text-yellow-200 mb-2">YOUR CST BALANCE</p>
-        <p className="text-2xl font-bold text-center text-white">{balance} CST</p>
+        <p className="text-lg font-bold text-center text-yellow-200 mb-2">YOUR CTKN BALANCE</p>
+        <p className="text-2xl font-bold text-center text-white">{balance} CTKN</p>
       </div>
 
       <div className="space-y-4 relative z-10">
@@ -131,7 +131,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
               onClick={buyTokens} 
               className="ml-3 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 rounded-lg font-bold text-gray-900 transition-all duration-200 transform hover:scale-105 shadow-md"
             >
-              BUY CST
+              BUY CTKN
             </button>
           </div>
         </div>
@@ -144,14 +144,14 @@ export default function TokenSwap({ provider, balance, setBalance }) {
               type="text"
               value={tokenAmount}
               onChange={e => setTokenAmount(e.target.value)}
-              placeholder="CST amount"
+              placeholder="CTKN amount"
               className="flex-1 p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
             <button 
               onClick={sellTokens} 
               className="ml-3 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 rounded-lg font-bold text-gray-900 transition-all duration-200 transform hover:scale-105 shadow-md"
             >
-              SELL CST
+              SELL CTKN
             </button>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
           <div className="flex items-center">
             <input
               type="text"
-              placeholder="CST amount"
+              placeholder="CTKN amount"
               onChange={e => setTokenAmount(e.target.value)}
               className="flex-1 p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />

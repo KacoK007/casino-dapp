@@ -110,7 +110,7 @@ export default function Slots({ provider, onBalanceChange }) {
             // When all reels have stopped
             setTimeout(() => {
                 setIsSpinning(false);
-                setStatus(`Game Over - ${finalResult.result}! Payout: ${ethers.formatUnits(finalResult.payout, 18)} CST`);
+                setStatus(`Game Over - ${finalResult.result}! Payout: ${ethers.formatUnits(finalResult.payout, 18)} CTKN`);
                 setFinalResult(null);
                 fetchBalance();
             }, stopOrder.current.length * 900 + 1500);
@@ -266,7 +266,7 @@ export default function Slots({ provider, onBalanceChange }) {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
                     <input
                         type="text"
-                        placeholder="Bet amount in CST"
+                        placeholder="Bet amount in CTKN"
                         value={bet}
                         onChange={(e) => setBet(e.target.value)}
                         className="flex-1 p-3 rounded-lg bg-gray-800 text-white border-2 border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400"

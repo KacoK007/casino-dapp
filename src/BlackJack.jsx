@@ -47,7 +47,7 @@ export default function Blackjack({ provider, onBalanceChange }) {
           casinoContract.on("GameResult", async (player, game, betAmount, payout, result) => {
             if (game !== "Blackjack" && player !== contract.address) return;
             refreshHands();
-            setStatus(`Game Over - ${result}! Payout: ${ethers.formatUnits(payout, 18)} CST`);
+            setStatus(`Game Over - ${result}! Payout: ${ethers.formatUnits(payout, 18)} CTKN`);
             await fetchBalance();
           });
         }
@@ -181,7 +181,7 @@ export default function Blackjack({ provider, onBalanceChange }) {
       <div className="mb-4 flex items-center justify-center relative z-10">
         <input
           type="text"
-          placeholder="Bet amount in CST"
+          placeholder="Bet amount in CTKN"
           value={bet}
           onChange={(e) => setBet(e.target.value)}
           className="p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold text-center w-48 focus:outline-none focus:ring-2 focus:ring-yellow-400"

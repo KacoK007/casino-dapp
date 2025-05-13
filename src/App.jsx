@@ -54,7 +54,7 @@ export default function App() {
               </div>
               <div className="bg-black bg-opacity-50 rounded-full px-4 py-2 border border-green-500">
                 <span className="text-green-300">Balance:</span> 
-                <span className="ml-2 font-bold">{balance} CST</span>
+                <span className="ml-2 font-bold">{balance} CTKN</span>
               </div>
             </div>
           )}
