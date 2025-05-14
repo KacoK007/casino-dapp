@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+
 const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
 const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
 const ABI = [ // Simplified ABI
@@ -16,6 +17,20 @@ export default function TokenSwap({ provider, balance, setBalance }) {
   const [status, setStatus] = useState('');
   const [signer, setSigner] = useState(null);
   const [tokenContract, setTokenContract] = useState(null);
+
+  // Calculate CTKN from ETH (1 ETH = 10,000,000 CTKN)
+  const calculateTokenAmount = (ethValue) => {
+    if (!ethValue) return "";
+    const tokens = parseFloat(ethValue) * 10000000;
+    return tokens.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  };
+
+  // Calculate ETH from CTKN (10,000,000 CTKN = 1 ETH)
+  const calculateEthAmount = (tokenValue) => {
+    if (!tokenValue) return "";
+    const eth = parseFloat(tokenValue) / 10000000;
+    return eth.toFixed(8);
+  };
 
   const fetchBalance = async () => {
     try {
@@ -115,6 +130,13 @@ export default function TokenSwap({ provider, balance, setBalance }) {
         <p className="text-2xl font-bold text-center text-white">{balance} CTKN</p>
       </div>
 
+      {/* Exchange Rate Display */}
+      <div className="mb-4 p-3 bg-black bg-opacity-30 rounded-lg text-center relative z-10">
+        <p className="text-sm font-semibold text-yellow-200">EXCHANGE RATE</p>
+        <p className="text-lg font-bold text-white">1 ETH = 10,000,000 CTKN</p>
+        <p className="text-xs text-gray-300 mt-1">Fixed rate</p>
+      </div>
+
       <div className="space-y-4 relative z-10">
         {/* Buy Tokens Section */}
         <div className="p-4 bg-black bg-opacity-30 rounded-lg">
@@ -123,7 +145,10 @@ export default function TokenSwap({ provider, balance, setBalance }) {
             <input
               type="text"
               value={ethAmount}
-              onChange={e => setEthAmount(e.target.value)}
+              onChange={(e) => {
+                setEthAmount(e.target.value);
+                setTokenAmount(calculateTokenAmount(e.target.value));
+              }}
               placeholder="ETH amount"
               className="flex-1 p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
@@ -134,6 +159,11 @@ export default function TokenSwap({ provider, balance, setBalance }) {
               BUY CTKN
             </button>
           </div>
+          {ethAmount && (
+            <p className="text-sm text-yellow-200 mt-2">
+              You will receive: <span className="font-bold">{calculateTokenAmount(ethAmount)} CTKN</span>
+            </p>
+          )}
         </div>
 
         {/* Sell Tokens Section */}
@@ -143,7 +173,10 @@ export default function TokenSwap({ provider, balance, setBalance }) {
             <input
               type="text"
               value={tokenAmount}
-              onChange={e => setTokenAmount(e.target.value)}
+              onChange={(e) => {
+                setTokenAmount(e.target.value);
+                setEthAmount(calculateEthAmount(e.target.value));
+              }}
               placeholder="CTKN amount"
               className="flex-1 p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
@@ -154,6 +187,11 @@ export default function TokenSwap({ provider, balance, setBalance }) {
               SELL CTKN
             </button>
           </div>
+          {tokenAmount && (
+            <p className="text-sm text-yellow-200 mt-2">
+              You will receive: <span className="font-bold">{calculateEthAmount(tokenAmount)} ETH</span>
+            </p>
+          )}
         </div>
 
         {/* Approve Tokens Section */}

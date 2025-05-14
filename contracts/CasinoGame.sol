@@ -173,16 +173,6 @@ contract CasinoGame is Ownable, ReentrancyGuard {
         emit GameResult(msg.sender, "Blackjack", game.betAmount, payout, result);
     }
 
-    function timeoutBlackjack() external nonReentrant {
-        BlackjackGame storage game = blackjackGames[msg.sender];
-        require(game.state == GameState.Playing, "No active game");
-        require(block.timestamp >= game.startedAt + BLACKJACK_TIMEOUT, "Game not expired");
-
-        game.state = GameState.Finished;
-        totalReserved -= game.betAmount * 2;
-        houseProfit += game.betAmount;
-        emit GameResult(msg.sender, "Blackjack", game.betAmount, 0, "Timeout");
-    }
 
     // Improved deck shuffling
     function shuffleDeck(BlackjackGame storage game) internal {
@@ -230,6 +220,16 @@ contract CasinoGame is Ownable, ReentrancyGuard {
     }
 
     // === Admin ===
+     function ownerTimeoutGame(address player) external onlyOwner nonReentrant {
+        BlackjackGame storage game = blackjackGames[player];
+        require(game.state == GameState.Playing, "No active game for this player");
+        require(block.timestamp >= game.startedAt + BLACKJACK_TIMEOUT, "Game not expired");
+
+        game.state = GameState.Finished;
+        totalReserved -= game.betAmount * 2;
+        houseProfit += game.betAmount;
+        emit GameResult(player, "Blackjack", game.betAmount, 0, "Admin Timeout");
+    }
     function withdrawProfit(address to) external onlyOwner nonReentrant {
         uint256 totalBalance = casinoToken.balanceOf(address(this));
         uint256 actualProfit = (houseProfit * houseEdgeBP) / 10000;

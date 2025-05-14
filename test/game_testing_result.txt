@@ -1,0 +1,322 @@
+Using contract tester version 0.6.4
+(1/3)🧬Compiling contract: CasinoGame_flattened_20852978_1747151294.sol
+[✅PASS]Compilation
+(2/3)🤖Generating test case for: CasinoGame_flattened_20852978_1747151294.sol
+[✅PASS]Read contract
+[ℹ️INFO] Contract file already exists in destination, skipping adjust.
+[⚠️WARNING]No </think> tag found in input
+[✅PASS]Test case generation
+[✅PASS]Write test contract file
+(3/3)🧪Running tests in CasinoGame_flattened_20852978_1747151294.t.sol
+(🧪Attempt 1/3)
+[ℹ️INFO] Encountered compilation error, applying automatic fixer
+[⚠️WARNING]No </think> tag found in input
+[✅PASS]Corrected test contract with compilation error
+[✅PASS]Updated test file
+(🧪Attempt 2/3)
+[ℹ️INFO] Encountered compilation error, applying automatic fixer
+[⚠️WARNING]No </think> tag found in input
+[✅PASS]Corrected test contract with compilation error
+[✅PASS]Updated test file
+(🧪Attempt 3/3)
+
+
+Compiling 1 files with Solc 0.8.28
+Solc 0.8.28 finished in 781.64ms
+Compiler run successful with warnings:
+Warning (2072): Unused local variable.
+   --> test/CasinoGame_flattened_20852978_1747151294.t.sol:147:9:
+    |
+147 |         uint256 contractBalanceBefore = mockToken.balanceOf(address(casinoGame));
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning (2072): Unused local variable.
+   --> test/CasinoGame_flattened_20852978_1747151294.t.sol:148:9:
+    |
+148 |         uint256 playerBalanceBefore = mockToken.balanceOf(player);
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Ran 12 tests for test/CasinoGame_flattened_20852978_1747151294.t.sol:CasinoGameTest
+[PASS] testBlackjackStandFlow() (gas: 518625)
+Traces:
+  [589525] CasinoGameTest::testBlackjackStandFlow()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [498578] CasinoGame::startBlackjack(100000000000000000000 [1e20])
+    │   ├─ [1245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   ├─ [2873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000000 [1e23]
+    │   ├─ [10261] MockERC20::transferFrom(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit DeckShuffled(player: ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Stop] 
+    ├─ [46552] CasinoGame::stand()
+    │   ├─ [1757] MockERC20::transfer(ECRecover: [0x0000000000000000000000000000000000000001], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit GameResult(player: ECRecover: [0x0000000000000000000000000000000000000001], game: "Blackjack", betAmount: 100000000000000000000 [1e20], payout: 100000000000000000000 [1e20], result: "Push")
+    │   └─ ← [Stop] 
+    ├─ [1642] CasinoGame::blackjackGames(ECRecover: [0x0000000000000000000000000000000000000001]) [staticcall]
+    │   └─ ← [Return] 100000000000000000000 [1e20], 2, 5, 1
+    ├─ [0] VM::assertEq(2, 2, "Game should be finished after stand") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[FAIL: revert: No active game or timed out] testBlackjackTimeoutByHit() (gas: 571161)
+Traces:
+  [3685186] CasinoGameTest::setUp()
+    ├─ [811833] → new MockERC20@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   └─ ← [Return] 3494 bytes of code
+    ├─ [2725171] → new CasinoGame@0x2e234DAe75C793f67A35089C9d99245E1C58470b
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: CasinoGameTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496])
+    │   └─ ← [Return] 13267 bytes of code
+    ├─ [23657] MockERC20::transfer(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000000 [1e23])
+    │   └─ ← [Return] true
+    ├─ [23429] MockERC20::mint(ECRecover: [0x0000000000000000000000000000000000000001], 10000000000000000000000 [1e22])
+    │   └─ ← [Stop] 
+    └─ ← [Stop] 
+
+  [571161] CasinoGameTest::testBlackjackTimeoutByHit()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [498578] CasinoGame::startBlackjack(100000000000000000000 [1e20])
+    │   ├─ [1245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   ├─ [2873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000000 [1e23]
+    │   ├─ [10261] MockERC20::transferFrom(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit DeckShuffled(player: ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Stop] 
+    ├─ [0] VM::warp(361)
+    │   └─ ← [Return] 
+    ├─ [32088] CasinoGame::hit()
+    │   ├─ emit GameResult(player: ECRecover: [0x0000000000000000000000000000000000000001], game: "Blackjack", betAmount: 100000000000000000000 [1e20], payout: 0, result: "Timeout")
+    │   └─ ← [Revert] revert: No active game or timed out
+    └─ ← [Revert] revert: No active game or timed out
+
+[PASS] testOwnerTimeoutGame() (gas: 532772)
+Traces:
+  [578172] CasinoGameTest::testOwnerTimeoutGame()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [498578] CasinoGame::startBlackjack(100000000000000000000 [1e20])
+    │   ├─ [1245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   ├─ [2873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000000 [1e23]
+    │   ├─ [10261] MockERC20::transferFrom(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit DeckShuffled(player: ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Stop] 
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    ├─ [0] VM::warp(361)
+    │   └─ ← [Return] 
+    ├─ [34154] CasinoGame::ownerTimeoutGame(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   ├─ emit GameResult(player: ECRecover: [0x0000000000000000000000000000000000000001], game: "Blackjack", betAmount: 100000000000000000000 [1e20], payout: 0, result: "Admin Timeout")
+    │   └─ ← [Stop] 
+    ├─ [1642] CasinoGame::blackjackGames(ECRecover: [0x0000000000000000000000000000000000000001]) [staticcall]
+    │   └─ ← [Return] 100000000000000000000 [1e20], 2, 3, 1
+    ├─ [0] VM::assertEq(2, 2, "Game should be finished after admin timeout") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testPlaySlotsInsufficientAllowance() (gas: 23712)
+Traces:
+  [23712] CasinoGameTest::testPlaySlotsInsufficientAllowance()
+    ├─ [0] VM::prank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf28dceb3:  Insufficient allowance)
+    │   └─ ← [Return] 
+    ├─ [12396] CasinoGame::playSlots(100000000000000000000 [1e20])
+    │   ├─ [3245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 0
+    │   └─ ← [Revert] revert: Insufficient allowance
+    └─ ← [Stop] 
+
+[FAIL: revert: Insufficient balance] testPlaySlotsInsufficientFunds() (gas: 40396)
+Traces:
+  [3685186] CasinoGameTest::setUp()
+    ├─ [811833] → new MockERC20@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   └─ ← [Return] 3494 bytes of code
+    ├─ [2725171] → new CasinoGame@0x2e234DAe75C793f67A35089C9d99245E1C58470b
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: CasinoGameTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496])
+    │   └─ ← [Return] 13267 bytes of code
+    ├─ [23657] MockERC20::transfer(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000000 [1e23])
+    │   └─ ← [Return] true
+    ├─ [23429] MockERC20::mint(ECRecover: [0x0000000000000000000000000000000000000001], 10000000000000000000000 [1e22])
+    │   └─ ← [Stop] 
+    └─ ← [Stop] 
+
+  [40396] CasinoGameTest::testPlaySlotsInsufficientFunds()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [3202] MockERC20::transfer(0x000000000000000000000000000000000000dEaD, 99100000000000000000000 [9.91e22])
+    │   └─ ← [Revert] revert: Insufficient balance
+    └─ ← [Revert] revert: Insufficient balance
+
+[PASS] testPlaySlotsNormalFlow() (gas: 109180)
+Traces:
+  [141741] CasinoGameTest::testPlaySlotsNormalFlow()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [2873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   └─ ← [Return] 100000000000000000000000 [1e23]
+    ├─ [2873] MockERC20::balanceOf(ECRecover: [0x0000000000000000000000000000000000000001]) [staticcall]
+    │   └─ ← [Return] 10000000000000000000000 [1e22]
+    ├─ [92168] CasinoGame::playSlots(100000000000000000000 [1e20])
+    │   ├─ [1245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   ├─ [873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000000 [1e23]
+    │   ├─ [8261] MockERC20::transferFrom(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit GameResult(player: ECRecover: [0x0000000000000000000000000000000000000001], game: "Slots", betAmount: 100000000000000000000 [1e20], payout: 0, result: "Lose")
+    │   └─ ← [Stop] 
+    ├─ [491] CasinoGame::totalReserved() [staticcall]
+    │   └─ ← [Return] 0
+    ├─ [0] VM::assertEq(0, 0, "Total reserved should be zero after playSlots") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testStartBlackjack() (gas: 521804)
+Traces:
+  [544504] CasinoGameTest::testStartBlackjack()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [498578] CasinoGame::startBlackjack(100000000000000000000 [1e20])
+    │   ├─ [1245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   ├─ [2873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000000 [1e23]
+    │   ├─ [10261] MockERC20::transferFrom(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit DeckShuffled(player: ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Stop] 
+    ├─ [1642] CasinoGame::blackjackGames(ECRecover: [0x0000000000000000000000000000000000000001]) [staticcall]
+    │   └─ ← [Return] 100000000000000000000 [1e20], 1, 3, 1
+    ├─ [0] VM::assertEq(100000000000000000000 [1e20], 100000000000000000000 [1e20], "Bet amount mismatch in blackjack game") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertEq(1, 1, "Game state should be Playing") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::assertGt(3, 0, "Game start time not recorded") [staticcall]
+    │   └─ ← [Return] 
+    ├─ [0] VM::stopPrank()
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testUpdateHouseEdge() (gas: 17834)
+Traces:
+  [17834] CasinoGameTest::testUpdateHouseEdge()
+    ├─ [7769] CasinoGame::updateHouseEdge(300)
+    │   └─ ← [Stop] 
+    ├─ [448] CasinoGame::houseEdgeBP() [staticcall]
+    │   └─ ← [Return] 300
+    ├─ [0] VM::assertEq(300, 300, "House edge was not updated correctly") [staticcall]
+    │   └─ ← [Return] 
+    └─ ← [Stop] 
+
+[PASS] testUpdateHouseEdgeAccessControl() (gas: 14025)
+Traces:
+  [14025] CasinoGameTest::testUpdateHouseEdgeAccessControl()
+    ├─ [0] VM::prank(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [2986] CasinoGame::updateHouseEdge(300)
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x0000000000000000000000000000000000000002)
+    └─ ← [Stop] 
+
+[FAIL: revert: No active game or timed out] testWithdrawProfit() (gas: 571183)
+Traces:
+  [3685186] CasinoGameTest::setUp()
+    ├─ [811833] → new MockERC20@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+    │   └─ ← [Return] 3494 bytes of code
+    ├─ [2725171] → new CasinoGame@0x2e234DAe75C793f67A35089C9d99245E1C58470b
+    │   ├─ emit OwnershipTransferred(previousOwner: 0x0000000000000000000000000000000000000000, newOwner: CasinoGameTest: [0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496])
+    │   └─ ← [Return] 13267 bytes of code
+    ├─ [23657] MockERC20::transfer(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000000 [1e23])
+    │   └─ ← [Return] true
+    ├─ [23429] MockERC20::mint(ECRecover: [0x0000000000000000000000000000000000000001], 10000000000000000000000 [1e22])
+    │   └─ ← [Stop] 
+    └─ ← [Stop] 
+
+  [571183] CasinoGameTest::testWithdrawProfit()
+    ├─ [0] VM::startPrank(ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Return] 
+    ├─ [23129] MockERC20::approve(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   └─ ← [Return] true
+    ├─ [498578] CasinoGame::startBlackjack(100000000000000000000 [1e20])
+    │   ├─ [1245] MockERC20::allowance(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000 [1e20]
+    │   ├─ [2873] MockERC20::balanceOf(CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b]) [staticcall]
+    │   │   └─ ← [Return] 100000000000000000000000 [1e23]
+    │   ├─ [10261] MockERC20::transferFrom(ECRecover: [0x0000000000000000000000000000000000000001], CasinoGame: [0x2e234DAe75C793f67A35089C9d99245E1C58470b], 100000000000000000000 [1e20])
+    │   │   └─ ← [Return] true
+    │   ├─ emit DeckShuffled(player: ECRecover: [0x0000000000000000000000000000000000000001])
+    │   └─ ← [Stop] 
+    ├─ [0] VM::warp(361)
+    │   └─ ← [Return] 
+    ├─ [32088] CasinoGame::hit()
+    │   ├─ emit GameResult(player: ECRecover: [0x0000000000000000000000000000000000000001], game: "Blackjack", betAmount: 100000000000000000000 [1e20], payout: 0, result: "Timeout")
+    │   └─ ← [Revert] revert: No active game or timed out
+    └─ ← [Revert] revert: No active game or timed out
+
+[PASS] testWithdrawProfitAccessControl() (gas: 14128)
+Traces:
+  [14128] CasinoGameTest::testWithdrawProfitAccessControl()
+    ├─ [0] VM::prank(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [3012] CasinoGame::withdrawProfit(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x0000000000000000000000000000000000000002)
+    └─ ← [Stop] 
+
+[PASS] test_arbitraryCallerCannotUpdateOwnerOnly() (gas: 18888)
+Traces:
+  [18888] CasinoGameTest::test_arbitraryCallerCannotUpdateOwnerOnly()
+    ├─ [0] VM::prank(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [2986] CasinoGame::updateHouseEdge(400)
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x0000000000000000000000000000000000000002)
+    ├─ [0] VM::prank(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Return] 
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return] 
+    ├─ [3012] CasinoGame::withdrawProfit(SHA-256: [0x0000000000000000000000000000000000000002])
+    │   └─ ← [Revert] OwnableUnauthorizedAccount(0x0000000000000000000000000000000000000002)
+    └─ ← [Stop] 
+
+Suite result: FAILED. 9 passed; 3 failed; 0 skipped; finished in 5.90ms (8.09ms CPU time)
+
+Ran 1 test suite in 1.09s (5.90ms CPU time): 9 tests passed, 3 failed, 0 skipped (12 total tests)
+
+Failing tests:
+Encountered 3 failing tests in test/CasinoGame_flattened_20852978_1747151294.t.sol:CasinoGameTest
+[FAIL: revert: No active game or timed out] testBlackjackTimeoutByHit() (gas: 571161)
+[FAIL: revert: Insufficient balance] testPlaySlotsInsufficientFunds() (gas: 40396)
+[FAIL: revert: No active game or timed out] testWithdrawProfit() (gas: 571183)
+
+Encountered a total of 3 failing tests, 9 tests succeeded
+
