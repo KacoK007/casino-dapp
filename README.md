@@ -17,7 +17,6 @@ Contracts deployed on:
 - **CasinoToken:** `0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d`
 - **CasinoGame:** `0x98f41F64F738bA25FC884227Dc4cFfd01669F723`
 
-(Replace with actual addresses)
 
 ---
 
