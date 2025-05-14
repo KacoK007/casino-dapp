@@ -110,12 +110,17 @@ export default function Slots({ provider, onBalanceChange }) {
             // When all reels have stopped
             setTimeout(() => {
                 setIsSpinning(false);
-                setStatus(`Game Over - ${finalResult.result}! Payout: ${ethers.formatUnits(finalResult.payout, 18)} CTKN`);
-                setFinalResult(null);
-                fetchBalance();
-            }, stopOrder.current.length * 900 + 1500);
+                
+                // Small delay after spinning stops before showing result
+                setTimeout(() => {
+                    setStatus(`Game Over - ${finalResult.result}! Payout: ${ethers.formatUnits(finalResult.payout, 18)} CTKN`);
+                    setFinalResult(null);
+                    fetchBalance();
+                }, 1000); // 300ms delay after spinning stops
+            }, stopOrder.current.length * 800 + 1500);
         }
     }, [finalResult]);
+
 
     const startSpinning = () => {
         // Reset reel states

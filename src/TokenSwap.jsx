@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { ethers, parseUnits } from 'ethers';
 
 const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
 const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
@@ -70,6 +70,10 @@ export default function TokenSwap({ provider, balance, setBalance }) {
   const approveTokens = async (amount) => {
     try {
       const decimals = 18;
+      if (!amount || parseUnits(amount, decimals) <= 0) {
+          setStatus("Please enter a valid token amount.");
+          return;
+      }
       const amountInTokens = ethers.parseUnits(amount, decimals);
       const tx = await tokenContract.approve(CASINO_ADDRESS, amountInTokens);
       await tx.wait();
@@ -81,6 +85,10 @@ export default function TokenSwap({ provider, balance, setBalance }) {
 
   const buyTokens = async () => {
     try {
+      if (!ethAmount || parseFloat(ethAmount) <= 0) {
+                setStatus("Please enter a valid ETH amount.");
+                return;
+            }
       const tx = await tokenContract.buy({ value: ethers.parseEther(ethAmount) });
       await tx.wait();
       setStatus(`Swapped ${ethAmount} ETH for CTKN`);
@@ -93,12 +101,17 @@ export default function TokenSwap({ provider, balance, setBalance }) {
   const sellTokens = async () => {
     try {
       const decimals = await tokenContract.decimals();
+      if (!tokenAmount || parseUnits(tokenAmount, decimals) <= 0) {
+                setStatus("Please enter a valid token amount.");
+                return;
+            }
       const amount = ethers.parseUnits(tokenAmount, decimals);
       const approveTx = await tokenContract.approve(TOKEN_ADDRESS, amount);
       await approveTx.wait();
       const tx = await tokenContract.sell(amount);
       await tx.wait();
       setStatus(`Swapped ${tokenAmount} CTKN for ETH`);
+      await fetchBalance();
     } catch (err) {
       setStatus(`Error: ${err.message}`);
     }
@@ -201,7 +214,6 @@ export default function TokenSwap({ provider, balance, setBalance }) {
             <input
               type="text"
               placeholder="CTKN amount"
-              onChange={e => setTokenAmount(e.target.value)}
               className="flex-1 p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
             <button 
