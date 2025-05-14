@@ -1,6 +1,6 @@
 # 🎰 Mini Casino DApp
 
-A decentralized casino application where players can bet CST tokens (CasinoToken) in games like Slots, Blackjack.
+A decentralized casino application where players can bet CTKN tokens (CasinoToken) in games like Slots, Blackjack.
 
 ---
 
@@ -21,7 +21,7 @@ Contracts deployed on:
 ---
 
 ## 📦 Features
-- Swap ETH ↔ CST
+- Swap ETH ↔ CTKN
 - Play Blackjack (with real deck logic), Slots
 
 ---
@@ -44,7 +44,7 @@ Contracts deployed on:
 ---
 
 ## 🛠️ Build & Deploy
-Replace the the addresses in BlackJack.jsx and Slots.jsx.
+Replace the addresses in BlackJack.jsx and Slots.jsx.
 ```bash
 npm install
 npm run dev            # for local development
