@@ -80,7 +80,12 @@ export default function TokenSwap({ provider, balance, setBalance }) {
       await tx.wait();
       setStatus(`Approved ${approveAmount} CTKN for spending by the casino contract.`);
     } catch (err) {
-      setStatus(`Error: ${err.message}`);
+      if (err.reason === "rejected"){
+        setStatus("Allowance rejected by user.");
+      }
+      else {
+        setStatus(`Error: ${err.message}`);
+      }
     }
   };
 
@@ -95,7 +100,12 @@ export default function TokenSwap({ provider, balance, setBalance }) {
       setStatus(`Swapped ${ethAmount} ETH for CTKN`);
       await fetchBalance();
     } catch (err) {
-      setStatus(`Error: ${err.message}`);
+      if (err.reason === "rejected"){
+        setStatus("Buying CTKN rejected by user.");
+      }
+      else {
+        setStatus(`Error: ${err.message}`);
+      }
     }
   };
 
@@ -114,7 +124,12 @@ export default function TokenSwap({ provider, balance, setBalance }) {
       setStatus(`Swapped ${tokenAmount} CTKN for ETH`);
       await fetchBalance();
     } catch (err) {
-      setStatus(`Error: ${err.message}`);
+      if (err.reason === "rejected"){
+        setStatus("Selling CTKN rejected by user.");
+      }
+      else {
+        setStatus(`Error: ${err.message}`);
+      }
     }
   };
 
