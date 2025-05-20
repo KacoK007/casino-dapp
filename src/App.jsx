@@ -4,10 +4,32 @@ import TokenSwap from './TokenSwap';
 import Blackjack from './BlackJack';
 import Slots from './Slots';
 
+const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
+const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
+const ABI = [
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function decimals() view returns (uint8)"
+];
+
 export default function App() {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState('0');
+  const [allowance, setAllowance] = useState('0');
+
+  const fetchAllowance = async () => {
+    try {
+      if (provider && account) {
+        const tokenContract = new ethers.Contract(TOKEN_ADDRESS, ABI, provider);
+        const allowanceWei = await tokenContract.allowance(account, CASINO_ADDRESS);
+        const decimals = await tokenContract.decimals();
+        const allowanceFormatted = ethers.formatUnits(allowanceWei, decimals);
+        setAllowance(allowanceFormatted);
+      }
+    } catch (err) {
+      console.error('Error fetching allowance:', err);
+    }
+  };
 
   useEffect(() => {
     if (window.ethereum) {
@@ -25,6 +47,11 @@ export default function App() {
       alert('Please install MetaMask to use this app.');
     }
   }, []);
+
+  // Add effect to fetch allowance when account changes
+  useEffect(() => {
+    fetchAllowance();
+  }, [account, balance]); // Re-fetch when account or balance changes
 
   const handleBalanceChange = (newBalance) => {
     setBalance(newBalance);
@@ -55,6 +82,10 @@ export default function App() {
               <div className="bg-black bg-opacity-50 rounded-full px-4 py-2 border border-green-500">
                 <span className="text-green-300">Balance:</span> 
                 <span className="ml-2 font-bold">{balance} CTKN</span>
+              </div>
+              <div className="bg-black bg-opacity-50 rounded-full px-4 py-2 border border-purple-500">
+                <span className="text-purple-300">Allowance:</span> 
+                <span className="ml-2 font-bold">{allowance} CTKN</span>
               </div>
             </div>
           )}

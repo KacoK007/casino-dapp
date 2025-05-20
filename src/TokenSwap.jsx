@@ -14,6 +14,7 @@ const ABI = [ // Simplified ABI
 export default function TokenSwap({ provider, balance, setBalance }) {
   const [ethAmount, setEthAmount] = useState('');
   const [tokenAmount, setTokenAmount] = useState('');
+  const [approveAmount, setApproveAmount] = useState('');
   const [status, setStatus] = useState('');
   const [signer, setSigner] = useState(null);
   const [tokenContract, setTokenContract] = useState(null);
@@ -22,7 +23,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
   const calculateTokenAmount = (ethValue) => {
     if (!ethValue) return "";
     const tokens = parseFloat(ethValue) * 10000000;
-    return tokens.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    return tokens;
   };
 
   // Calculate ETH from CTKN (10,000,000 CTKN = 1 ETH)
@@ -67,17 +68,17 @@ export default function TokenSwap({ provider, balance, setBalance }) {
     initContract();
   }, [provider]);
 
-  const approveTokens = async (amount) => {
+  const approveTokens = async () => {
     try {
-      const decimals = 18;
-      if (!amount || parseUnits(amount, decimals) <= 0) {
+      const decimals = await tokenContract.decimals();
+      if (!approveAmount || parseUnits(approveAmount, decimals) <= 0) {
           setStatus("Please enter a valid token amount.");
           return;
       }
-      const amountInTokens = ethers.parseUnits(amount, decimals);
+      const amountInTokens = ethers.parseUnits(approveAmount, decimals);
       const tx = await tokenContract.approve(CASINO_ADDRESS, amountInTokens);
       await tx.wait();
-      setStatus(`Approved ${amount} CTKN for spending by the casino contract.`);
+      setStatus(`Approved ${approveAmount} CTKN for spending by the casino contract.`);
     } catch (err) {
       setStatus(`Error: ${err.message}`);
     }
@@ -174,7 +175,7 @@ export default function TokenSwap({ provider, balance, setBalance }) {
           </div>
           {ethAmount && (
             <p className="text-sm text-yellow-200 mt-2">
-              You will receive: <span className="font-bold">{calculateTokenAmount(ethAmount)} CTKN</span>
+              You will receive: <span className="font-bold">{calculateTokenAmount(ethAmount).toLocaleString('en-US', { maximumFractionDigits: 0 })} CTKN</span>
             </p>
           )}
         </div>
@@ -213,11 +214,13 @@ export default function TokenSwap({ provider, balance, setBalance }) {
           <div className="flex items-center">
             <input
               type="text"
+              value={approveAmount}
+              onChange={(e) => setApproveAmount(e.target.value)}
               placeholder="CTKN amount"
               className="flex-1 p-3 rounded-lg bg-white bg-opacity-90 text-black font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
             <button 
-              onClick={() => approveTokens(tokenAmount)} 
+              onClick={() => approveTokens()} 
               className="ml-3 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 rounded-lg font-bold text-gray-900 transition-all duration-200 transform hover:scale-105 shadow-md"
             >
               APPROVE

@@ -217,6 +217,11 @@ export default function Slots({ provider, onBalanceChange }) {
                 setStatus("Insufficient allowance. Please approve the tokens first.");
             } else if (err.reason === "Bet must be greater than zero") {
                 setStatus("Bet must be greater than zero.");
+            } else if (err.reason === "Insufficient available funds") {
+                setStatus("Insufficient available funds.");
+            }
+            else {
+                setStatus('Error starting game: ' + err.message);
             }
         }
     };
