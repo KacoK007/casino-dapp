@@ -4,8 +4,8 @@ import TokenSwap from './TokenSwap';
 import Blackjack from './BlackJack';
 import Slots from './Slots';
 
-const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
-const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
+const TOKEN_ADDRESS = "0x86a86AA4d40b49EAb239Cc29e6394759849090CF";
+const CASINO_ADDRESS = "0xe0BbF2764F2b79F54129F6Df88Dc278DEfa82a7d";
 const ABI = [
   "function allowance(address owner, address spender) view returns (uint256)",
   "function decimals() view returns (uint8)"

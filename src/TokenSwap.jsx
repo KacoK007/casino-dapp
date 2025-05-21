@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ethers, parseUnits } from 'ethers';
 
-const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
-const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
+const TOKEN_ADDRESS = "0x86a86AA4d40b49EAb239Cc29e6394759849090CF";
+const CASINO_ADDRESS = "0xe0BbF2764F2b79F54129F6Df88Dc278DEfa82a7d";
 const ABI = [ // Simplified ABI
     "function buy() payable",
     "function sell(uint256 tokenAmount)",
@@ -75,6 +75,10 @@ export default function TokenSwap({ provider, balance, setBalance }) {
           setStatus("Please enter a valid token amount.");
           return;
       }
+      if (parseFloat(approveAmount) > parseFloat(balance)) {
+        setStatus("Approval amount exceeds your balance.");
+        return;
+      }
       const amountInTokens = ethers.parseUnits(approveAmount, decimals);
       const tx = await tokenContract.approve(CASINO_ADDRESS, amountInTokens);
       await tx.wait();
@@ -102,6 +106,8 @@ export default function TokenSwap({ provider, balance, setBalance }) {
     } catch (err) {
       if (err.reason === "rejected"){
         setStatus("Buying CTKN rejected by user.");
+      } else if (err.code === "INSUFFICIENT_FUNDS") {
+        setStatus("Insufficient funds for transaction.");
       }
       else {
         setStatus(`Error: ${err.message}`);
@@ -116,9 +122,11 @@ export default function TokenSwap({ provider, balance, setBalance }) {
                 setStatus("Please enter a valid token amount.");
                 return;
             }
+      if (parseFloat(tokenAmount) > parseFloat(balance)) {
+        setStatus("Sell amount exceeds your balance.");
+        return;
+      }
       const amount = ethers.parseUnits(tokenAmount, decimals);
-      const approveTx = await tokenContract.approve(TOKEN_ADDRESS, amount);
-      await approveTx.wait();
       const tx = await tokenContract.sell(amount);
       await tx.wait();
       setStatus(`Swapped ${tokenAmount} CTKN for ETH`);

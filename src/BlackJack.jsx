@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
-const TOKEN_ADDRESS = "0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d";
-const CASINO_ADDRESS = "0x98f41F64F738bA25FC884227Dc4cFfd01669F723";
+const TOKEN_ADDRESS = "0x86a86AA4d40b49EAb239Cc29e6394759849090CF";
+const CASINO_ADDRESS = "0xe0BbF2764F2b79F54129F6Df88Dc278DEfa82a7d";
 const ABI = [
   "function startBlackjack(uint256 betAmount) external",
   "function hit() external",
@@ -121,6 +121,8 @@ export default function Blackjack({ provider, onBalanceChange }) {
                 setStatus("Insufficient allowance. Please approve the tokens first.");
             } else if (err.reason === "Bet must be greater than zero") {
                 setStatus("Bet must be greater than zero.");
+            } else if (err.reason === "No active game or timed out") {
+                setStatus("No active game or timed out. Please start a new game.");
             } else {
                 setStatus('Error hitting: ' + err.message);
             }
@@ -142,6 +144,8 @@ export default function Blackjack({ provider, onBalanceChange }) {
                     setStatus("Insufficient allowance. Please approve the tokens first.");
                 } else if (err.reason === "Bet must be greater than zero") {
                     setStatus("Bet must be greater than zero.");
+                } else if (err.reason === "No active game or timed out") {
+                    setStatus("No active game or timed out. Please start a new game.");
                 } else {
                     setStatus('Error Standing: ' + err.message);
             }
