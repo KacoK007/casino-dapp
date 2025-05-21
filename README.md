@@ -14,8 +14,8 @@ Deployed frontend (GitHub Pages):
 **Testnet:** Sepolia
 
 Contracts deployed on:
-- **CasinoToken:** `0x3D2635adF0Bf73C6F48d215b031e78b84E850b8d`
-- **CasinoGame:** `0x98f41F64F738bA25FC884227Dc4cFfd01669F723`
+- **CasinoToken:** `0x86a86AA4d40b49EAb239Cc29e6394759849090CF`
+- **CasinoGame:** `0xe0BbF2764F2b79F54129F6Df88Dc278DEfa82a7d`
 
 
 ---
