@@ -1,16 +1,16 @@
-# 🎰 Mini Casino DApp
+# Mini Casino DApp
 
 A decentralized casino application where players can bet CTKN tokens (CasinoToken) in games like Slots, Blackjack.
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 Deployed frontend (GitHub Pages):
-👉 [https://kacok007.github.io/casino-dapp/](https://kacok007.github.io/casino-dapp/)
+[https://kacok007.github.io/casino-dapp/](https://kacok007.github.io/casino-dapp/)
 
 ---
 
-## 🔗 Ethereum Testnet Used
+## Ethereum Testnet Used
 **Testnet:** Sepolia
 
 Contracts deployed on:
@@ -20,7 +20,7 @@ Contracts deployed on:
 
 ---
 
-## 📦 Features
+## Features
 - Swap ETH ↔ CTKN
 - Play Blackjack (with real deck logic), Slots
 
@@ -43,7 +43,7 @@ Contracts deployed on:
 
 ---
 
-## 🛠️ Build & Deploy
+## 🛠Build & Deploy
 Replace the addresses in BlackJack.jsx and Slots.jsx.
 ```bash
 npm install
@@ -53,10 +53,7 @@ npm run deploy         # deploys to GitHub Pages
 
 ---
 
-## 👛 Wallet Support
+## Wallet Support
 - MetaMask (via Ethers.js)
 
 ---
-
-## 📄 License
-MIT
