@@ -26,7 +26,7 @@ Contracts deployed on:
 
 ---
 
-## 🧪 How to Deploy Smart Contracts via Remix
+## How to Deploy Smart Contracts via Remix
 1. Go to [Remix IDE](https://remix.ethereum.org/)
 2. Paste the contents of `CasinoToken.sol` and `CasinoGame.sol` into new files
 3. Compile both contracts using the Solidity compiler
@@ -43,7 +43,7 @@ Contracts deployed on:
 
 ---
 
-## 🛠Build & Deploy
+## Build & Deploy
 Replace the addresses in BlackJack.jsx and Slots.jsx.
 ```bash
 npm install
